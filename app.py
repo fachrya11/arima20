@@ -20,11 +20,17 @@ try:
     df_historical = pd.read_csv(r'data/Data Historis TLKM.csv')  # Perbaiki path file jika perlu
     st.write("Data historis:")
     st.write(df_historical.head())  # Tampilkan beberapa baris pertama untuk verifikasi
+
+    # Display column names for debugging
+    st.write("Nama kolom dalam data historis:", df_historical.columns)
+    
+    # Remove any leading/trailing whitespace from column names
+    df_historical.columns = df_historical.columns.str.strip()
     
     if 'Tanggal' not in df_historical.columns:
         raise KeyError("Kolom 'Tanggal' tidak ditemukan dalam data historis.")
     
-    if 'Penutupan' not in df_historical.columns:
+    if 'Pembukaan' not in df_historical.columns:
         raise KeyError("Kolom 'Pembukaan' tidak ditemukan dalam data historis.")
     
     df_historical['Tanggal'] = pd.to_datetime(df_historical['Tanggal'])
@@ -32,10 +38,10 @@ try:
     st.success('Data historis berhasil dimuat')
 except FileNotFoundError:
     st.error('File data historis tidak ditemukan. Pastikan path file benar.')
-    st.stop()
 except KeyError as e:
     st.error(str(e))
-    st.stop()
+except Exception as e:
+    st.error(f'Terjadi kesalahan: {str(e)}')
 
 start_date = st.date_input('Start Date', value=datetime(2021, 1, 1))
 end_date = st.date_input('End Date', value=datetime.today())
