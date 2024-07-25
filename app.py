@@ -18,7 +18,7 @@ st.title('data/Data Historis Saham PT. Telkom')
 
 # Load historical data
 try:
-    df_historical = pd.read_csv('D:\Proyek Data Mining\stock_prediction\data\Data Historis TLKM.csv')  # Pastikan path file benar
+    df_historical = pd.read_csv('data\Data Historis TLKM.csv')  # Pastikan path file benar
     st.write("Data historis:")
     st.write(df_historical.head())  # Tampilkan beberapa baris pertama untuk verifikasi
     
