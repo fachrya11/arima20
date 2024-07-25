@@ -14,7 +14,7 @@ except FileNotFoundError:
     st.error('File model tidak ditemukan. Pastikan path file benar.')
     st.stop()
 
-st.title('Data Historis Saham PT. Telkom')
+st.title('data/Data Historis Saham PT. Telkom')
 
 # Load historical data
 try:
