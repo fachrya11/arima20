@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-import requests
 import numpy as np
 import pickle
 from datetime import datetime, timedelta
@@ -18,7 +17,7 @@ st.title('Data Historis Saham PT. Telkom')
 
 # Load historical data
 try:
-    df_historical = pd.read_csv('data\Data Historis TLKM.csv')  # Pastikan path file benar
+    df_historical = pd.read_csv(r'data/Data Historis TLKM.csv')  # Pastikan path file benar
     st.write("Data historis:")
     st.write(df_historical.head())  # Tampilkan beberapa baris pertama untuk verifikasi
     
@@ -34,6 +33,9 @@ except FileNotFoundError:
 except KeyError as e:
     st.error(str(e))
     st.stop()
+
+# Display column names to debug
+st.write("Nama kolom dalam data historis:", df_historical.columns)
 
 start_date = st.date_input('Start Date', value=datetime(2021, 1, 1))
 end_date = st.date_input('End Date', value=datetime.today())
@@ -83,6 +85,6 @@ if st.button('Prediksi'):
             st.dataframe(df_merged)  # Menampilkan DataFrame sebagai tabel
             
             # Display results as a line chart
-            st.line_chart(df_merged[['Terakhir', 'predictions']])
+            st.line_chart(df_merged[['predictions']])  # Pastikan nama kolom yang ditampilkan di chart sesuai
     else:
         st.write('Silakan masukkan tanggal mulai dan tanggal akhir.')
