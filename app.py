@@ -17,12 +17,15 @@ st.title('Data Historis Saham PT. Telkom')
 
 # Load historical data
 try:
-    df_historical = pd.read_csv(r'data/Data Historis TLKM.csv')  # Pastikan path file benar
+    df_historical = pd.read_csv(r'data/Data Historis TLKM.csv')  # Perbaiki path file jika perlu
     st.write("Data historis:")
     st.write(df_historical.head())  # Tampilkan beberapa baris pertama untuk verifikasi
     
     if 'Tanggal' not in df_historical.columns:
         raise KeyError("Kolom 'Tanggal' tidak ditemukan dalam data historis.")
+    
+    if 'Penutupan' not in df_historical.columns:
+        raise KeyError("Kolom 'Penutupan' tidak ditemukan dalam data historis.")
     
     df_historical['Tanggal'] = pd.to_datetime(df_historical['Tanggal'])
     df_historical.set_index('Tanggal', inplace=True)
@@ -33,9 +36,6 @@ except FileNotFoundError:
 except KeyError as e:
     st.error(str(e))
     st.stop()
-
-# Display column names to debug
-st.write("Nama kolom dalam data historis:", df_historical.columns)
 
 start_date = st.date_input('Start Date', value=datetime(2021, 1, 1))
 end_date = st.date_input('End Date', value=datetime.today())
@@ -85,6 +85,6 @@ if st.button('Prediksi'):
             st.dataframe(df_merged)  # Menampilkan DataFrame sebagai tabel
             
             # Display results as a line chart
-            st.line_chart(df_merged[['predictions']])  # Pastikan nama kolom yang ditampilkan di chart sesuai
+            st.line_chart(df_merged[['Penutupan', 'predictions']])
     else:
         st.write('Silakan masukkan tanggal mulai dan tanggal akhir.')
