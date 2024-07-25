@@ -25,7 +25,7 @@ try:
         raise KeyError("Kolom 'Tanggal' tidak ditemukan dalam data historis.")
     
     if 'Penutupan' not in df_historical.columns:
-        raise KeyError("Kolom 'Terendah' tidak ditemukan dalam data historis.")
+        raise KeyError("Kolom "Pembukaan" tidak ditemukan dalam data historis.")
     
     df_historical['Tanggal'] = pd.to_datetime(df_historical['Tanggal'])
     df_historical.set_index('Tanggal', inplace=True)
