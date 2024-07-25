@@ -85,6 +85,6 @@ if st.button('Prediksi'):
             st.dataframe(df_merged)  # Menampilkan DataFrame sebagai tabel
             
             # Display results as a line chart
-            st.line_chart(df_merged[['Penutupan', 'predictions']])
+            st.line_chart(df_merged[['Pembukaan', 'predictions']])
     else:
         st.write('Silakan masukkan tanggal mulai dan tanggal akhir.')
